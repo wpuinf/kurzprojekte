@@ -2,9 +2,6 @@ globals [ farbe zFarbe bgcolor]
 
 to setup
   clear-all
-  let -worldSize-x worldSize-x - worldSize-x * 2
-  let -worldSize-y worldSize-y - worldSize-y * 2
-  resize-world -worldSize-x -worldSize-y worldSize-x worldSize-y
   set farbe 00
   set bgcolor 9.9
   ask patches [
@@ -385,7 +382,7 @@ brushsize
 brushsize
 1
 25
-1.0
+2.0
 1
 1
 NIL
@@ -407,36 +404,6 @@ NIL
 NIL
 NIL
 1
-
-SLIDER
-18
-54
-190
-87
-worldSize-y
-worldSize-y
-0
-100
-50.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-18
-90
-190
-123
-worldSize-x
-worldSize-x
-0
-100
-50.0
-1
-1
-NIL
-HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
