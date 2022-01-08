@@ -26,7 +26,7 @@ to game
       fd 0.1
       if [ pcolor ] of patch-ahead 1 != black [
         set gameOver true
-        print word returnColor color " hat verloren!"
+        user-message word returnColor color " hat verloren!"
       ]
     ]
     tick
