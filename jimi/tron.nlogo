@@ -59,8 +59,8 @@ to r [ player ]
 end
 
 to-report returnColor [ farbe ]
-  if farbe = 105 [ report "blau"]
-  if farbe = 15 [ report "rot" ]
+  if farbe = 105 [ report "Blau"]
+  if farbe = 15 [ report "Rot" ]
   if farbe != 105 [
     if farbe != 15 [
       report "undefined"
