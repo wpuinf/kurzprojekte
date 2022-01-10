@@ -1,0 +1,15 @@
+;; Mixes two colors based on the global "Alpha" value.
+to-report mix-colors [ color1 color2 ]
+  ;; Convert colors to RGB if necessary
+  if is-number? color1 [ set color1 extract-rgb color1 ] ;
+  if is-number? color2 [ set color2 extract-rgb color2 ] ;
+
+  let procentual-alpha Alpha / 100 ;
+  let rest-procentual-alpha 1 - procentual-alpha ;
+
+  let r item 0 color1 * procentual-alpha + item 0 color2 * rest-procentual-alpha ;
+  let g item 1 color1 * procentual-alpha + item 1 color2 * rest-procentual-alpha ;
+  let b item 2 color1 * procentual-alpha + item 2 color2 * rest-procentual-alpha ;
+
+  report ( list r g b ) ;
+end

@@ -1,0 +1,43 @@
+to fill
+  ;; We have the exact same checks like in draw but we won't put that in switch-modes
+  ;; because other modes might require other checks.
+  let is-mouse-down? mouse-down? ;
+  if is-mouse-down? [
+    let current-patch patch mouse-xcor mouse-ycor ;
+    if current-patch != last-patch or not was-mouse-down? [
+      let start patch mouse-xcor mouse-ycor ;
+      ;; mix-colors in utils.nls
+      fill-from-non-recursive start [ pcolor ] of start mix-colors foreground-color [ pcolor ] of start ;
+    ]
+    set last-patch current-patch ;
+  ]
+  set was-mouse-down? is-mouse-down? ;
+end
+
+
+;; A much nicer solution, but stack overflows can occur with more patches.
+to fill-from [ start replace-color replace-with-color]
+  if replace-color = replace-with-color [ stop ] ;
+
+  ask start [
+    set pcolor replace-with-color ;
+    ask neighbors4 with [ pcolor = replace-color ] [ fill-from self replace-color replace-with-color ] ;
+  ]
+end
+
+
+to fill-from-non-recursive [ start replace-color replace-with-color]
+  if replace-color = replace-with-color [ stop ] ;
+
+  ;; A agentset to keep track of all the edge patches.
+  let fill-patches patch-set start ;
+
+  while [ any? fill-patches ] [
+    let neighbor-set no-patches ;
+    ask fill-patches [
+      set pcolor replace-with-color ;
+      set neighbor-set ( patch-set neighbor-set neighbors4 with [ pcolor = replace-color ] )
+    ]
+    set fill-patches neighbor-set ;
+  ]
+end

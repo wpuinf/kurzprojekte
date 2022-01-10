@@ -1,0 +1,36 @@
+to switch-modes
+    (ifelse
+    mode = "draw" [
+      draw ;; in draw.nls
+    ]
+    mode = "fill" [
+      fill ;; in fill.nls
+    ]
+    [
+      error "non-exhaustive"
+  ])
+end
+
+to export-image
+  if empty? Name [
+    output-print "Must provide a name" ;
+    stop ;
+  ]
+  carefully [
+    export-view (word name ".png") ;
+  ] [
+    output-print (word "ERROR: " error-message) ;
+  ]
+end
+
+to import-image
+  if empty? Import [
+    output-print "Must provide a name" ;
+    stop ;
+  ]
+  carefully [
+    import-pcolors-rgb Import ;
+  ] [
+    output-print (word "ERROR: " error-message) ;
+  ]
+end

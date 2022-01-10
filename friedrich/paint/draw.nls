@@ -1,0 +1,12 @@
+to draw
+  let is-mouse-down? mouse-down? ;
+  if is-mouse-down? [
+    let current-patch patch mouse-xcor mouse-ycor ;
+    if current-patch != last-patch or not was-mouse-down? [
+      ;; mix-colors in utils.nls
+      ask patch mouse-xcor mouse-ycor [ set pcolor mix-colors foreground-color pcolor ] ;
+    ]
+    set last-patch current-patch ;
+  ]
+  set was-mouse-down? is-mouse-down? ;
+end
